@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 
 const PortfolioProjects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -80,15 +81,16 @@ const PortfolioProjects = () => {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="group relative overflow-hidden rounded-lg shadow-md"
-            >
-              <img
+              className="group relative overflow-hidden rounded-lg shadow-md">
+              <Image
                 src={project.image}
                 alt={project.name}
+                width={400}
+                height={240}
                 className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110"
                 onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "/assets/images/placeholder.png"; // Fallback image
+                  const img = e.target as HTMLImageElement;
+                  img.src = "/assets/images/placeholder.png"; // Fallback image
                 }}
               />
               <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-center text-white px-4">
